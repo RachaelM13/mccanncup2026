@@ -124,17 +124,63 @@ INSERT INTO matches (id, round, match_number, home_team_id, away_team_id, kickof
 ('32000000-0000-0000-0000-000000000010', 'R32', 16, 'b1000000-0000-0000-0000-000000000001', 'b2000000-0000-0000-0000-000000000003', '2026-07-04 01:30:00+00', 'SCHEDULED')
 ON CONFLICT (round, match_number) DO NOTHING;
 
--- Round of 16 (8 matches)
-INSERT INTO matches (id, round, match_number, kickoff, status) VALUES
-('16000000-0000-0000-0000-000000000001', 'R16',  1,  '2026-07-04 17:00:00+00', 'SCHEDULED'), -- Sat Jul  4 · 1:00 PM ET
-('16000000-0000-0000-0000-000000000002', 'R16',  2,  '2026-07-04 21:00:00+00', 'SCHEDULED'), -- Sat Jul  4 · 5:00 PM ET
-('16000000-0000-0000-0000-000000000003', 'R16',  3,  '2026-07-07 00:00:00+00', 'SCHEDULED'), -- Mon Jul  6 · 8:00 PM ET
-('16000000-0000-0000-0000-000000000004', 'R16',  4,  '2026-07-06 19:00:00+00', 'SCHEDULED'), -- Mon Jul  6 · 3:00 PM ET
-('16000000-0000-0000-0000-000000000005', 'R16',  5,  '2026-07-05 20:00:00+00', 'SCHEDULED'), -- Sun Jul  5 · 4:00 PM ET
-('16000000-0000-0000-0000-000000000006', 'R16',  6,  '2026-07-06 00:00:00+00', 'SCHEDULED'), -- Sun Jul  5 · 8:00 PM ET
-('16000000-0000-0000-0000-000000000007', 'R16',  7,  '2026-07-07 20:00:00+00', 'SCHEDULED'), -- Tue Jul  7 · 4:00 PM ET
-('16000000-0000-0000-0000-000000000008', 'R16',  8,  '2026-07-07 16:00:00+00', 'SCHEDULED')  -- Tue Jul  7 · 12:00 PM ET
-ON CONFLICT (round, match_number) DO NOTHING;
+-- R32 → R16 (Official FIFA 2026 Bracket)
+
+-- R16 Match 1
+UPDATE matches SET next_match_id='16000000-0000-0000-0000-000000000001', next_match_slot='home'
+WHERE id='32000000-0000-0000-0000-000000000001'; -- Match 1
+
+UPDATE matches SET next_match_id='16000000-0000-0000-0000-000000000001', next_match_slot='away'
+WHERE id='32000000-0000-0000-0000-000000000002'; -- Match 2
+
+-- R16 Match 2
+UPDATE matches SET next_match_id='16000000-0000-0000-0000-000000000002', next_match_slot='home'
+WHERE id='32000000-0000-0000-0000-000000000003'; -- Match 3
+
+UPDATE matches SET next_match_id='16000000-0000-0000-0000-000000000002', next_match_slot='away'
+WHERE id='32000000-0000-0000-0000-000000000004'; -- Match 4
+
+-- R16 Match 3
+UPDATE matches SET next_match_id='16000000-0000-0000-0000-000000000003', next_match_slot='home'
+WHERE id='32000000-0000-0000-0000-000000000005'; -- Match 5
+
+UPDATE matches SET next_match_id='16000000-0000-0000-0000-000000000003', next_match_slot='away'
+WHERE id='32000000-0000-0000-0000-000000000006'; -- Match 6
+
+-- R16 Match 4
+UPDATE matches SET next_match_id='16000000-0000-0000-0000-000000000004', next_match_slot='home'
+WHERE id='32000000-0000-0000-0000-000000000007'; -- Match 7
+
+UPDATE matches SET next_match_id='16000000-0000-0000-0000-000000000004', next_match_slot='away'
+WHERE id='32000000-0000-0000-0000-000000000008'; -- Match 8
+
+-- R16 Match 5
+UPDATE matches SET next_match_id='16000000-0000-0000-0000-000000000005', next_match_slot='home'
+WHERE id='32000000-0000-0000-0000-000000000009'; -- Match 9
+
+UPDATE matches SET next_match_id='16000000-0000-0000-0000-000000000005', next_match_slot='away'
+WHERE id='32000000-0000-0000-0000-00000000000a'; -- Match 10
+
+-- R16 Match 6
+UPDATE matches SET next_match_id='16000000-0000-0000-0000-000000000006', next_match_slot='home'
+WHERE id='32000000-0000-0000-0000-00000000000b'; -- Match 11
+
+UPDATE matches SET next_match_id='16000000-0000-0000-0000-000000000006', next_match_slot='away'
+WHERE id='32000000-0000-0000-0000-00000000000c'; -- Match 12
+
+-- R16 Match 7
+UPDATE matches SET next_match_id='16000000-0000-0000-0000-000000000007', next_match_slot='home'
+WHERE id='32000000-0000-0000-0000-00000000000d'; -- Match 13
+
+UPDATE matches SET next_match_id='16000000-0000-0000-0000-000000000007', next_match_slot='away'
+WHERE id='32000000-0000-0000-0000-000000000010'; -- Match 16
+
+-- R16 Match 8
+UPDATE matches SET next_match_id='16000000-0000-0000-0000-000000000008', next_match_slot='home'
+WHERE id='32000000-0000-0000-0000-00000000000e'; -- Match 14
+
+UPDATE matches SET next_match_id='16000000-0000-0000-0000-000000000008', next_match_slot='away'
+WHERE id='32000000-0000-0000-0000-00000000000f'; -- Match 15
 
 -- Quarterfinals (4 matches)
 INSERT INTO matches (id, round, match_number, kickoff, status) VALUES

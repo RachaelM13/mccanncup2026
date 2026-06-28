@@ -38,6 +38,3 @@ UPDATE matches SET kickoff = '2026-07-15 19:00:00+00' WHERE id = '02000000-0000-
 -- Final
 -- Sun Jul 19 · 3:00 PM ET → 19:00 UTC
 UPDATE matches SET kickoff = '2026-07-19 19:00:00+00' WHERE id = '01000000-0000-0000-0000-000000000001';
-
--- Third Place — date TBD
-UPDATE matches SET kickoff = NULL WHERE id = '03000000-0000-0000-0000-000000000001';
