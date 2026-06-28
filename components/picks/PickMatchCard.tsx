@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import type { Match, Team } from '@/types';
+import FlagIcon from '@/components/ui/FlagIcon';
 
 interface PickMatchCardProps {
   match: Match;
@@ -105,7 +106,7 @@ function TeamButton({
         ${bg}
       `}
     >
-      <span className="text-xl flex-shrink-0">{team?.flag ?? '🏳️'}</span>
+      <FlagIcon code={team?.flag} name={team?.name ?? ''} className="h-5 w-7 flex-shrink-0" />
       <span className={`flex-1 text-sm truncate ${textColor} ${isTBD ? 'italic' : ''}`}>
         {team?.name ?? 'TBD'}
       </span>

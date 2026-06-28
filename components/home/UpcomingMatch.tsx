@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import type { Match } from '@/types';
 import { ROUND_LABELS } from '@/types';
 import { format, formatDistanceToNow, isPast } from 'date-fns';
+import FlagIcon from '@/components/ui/FlagIcon';
 
 interface UpcomingMatchProps {
   match: Match;
@@ -49,7 +50,7 @@ export default function UpcomingMatch({ match }: UpcomingMatchProps) {
         <div className="flex items-center justify-between gap-4">
           {/* Home */}
           <div className="flex-1 flex flex-col items-center gap-2 text-center">
-            <span className="text-5xl">{match.home_team?.flag ?? '🏳️'}</span>
+            <FlagIcon code={match.home_team?.flag} name={match.home_team?.name} className="h-14 w-20" />
             <span className="font-semibold text-sm">{match.home_team?.name ?? 'TBD'}</span>
           </div>
 
@@ -65,7 +66,7 @@ export default function UpcomingMatch({ match }: UpcomingMatchProps) {
 
           {/* Away */}
           <div className="flex-1 flex flex-col items-center gap-2 text-center">
-            <span className="text-5xl">{match.away_team?.flag ?? '🏳️'}</span>
+            <FlagIcon code={match.away_team?.flag} name={match.away_team?.name} className="h-14 w-20" />
             <span className="font-semibold text-sm">{match.away_team?.name ?? 'TBD'}</span>
           </div>
         </div>

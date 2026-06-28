@@ -1,0 +1,53 @@
+-- Replace emoji flag values with ISO 3166-1 alpha-2 codes
+-- (subdivision codes for England and Scotland)
+-- Components now render SVG flags from https://flagcdn.com/[code].svg
+-- This supersedes migration 004_fix_flags.sql
+
+UPDATE teams SET flag = 'mx'     WHERE fifa_code = 'MEX';
+UPDATE teams SET flag = 'kr'     WHERE fifa_code = 'KOR';
+UPDATE teams SET flag = 'cz'     WHERE fifa_code = 'CZE';
+UPDATE teams SET flag = 'za'     WHERE fifa_code = 'RSA';
+UPDATE teams SET flag = 'ca'     WHERE fifa_code = 'CAN';
+UPDATE teams SET flag = 'ch'     WHERE fifa_code = 'SUI';
+UPDATE teams SET flag = 'ba'     WHERE fifa_code = 'BIH';
+UPDATE teams SET flag = 'qa'     WHERE fifa_code = 'QAT';
+UPDATE teams SET flag = 'br'     WHERE fifa_code = 'BRA';
+UPDATE teams SET flag = 'ma'     WHERE fifa_code = 'MAR';
+UPDATE teams SET flag = 'gb-sct' WHERE fifa_code = 'SCO';
+UPDATE teams SET flag = 'ht'     WHERE fifa_code = 'HTI';
+UPDATE teams SET flag = 'us'     WHERE fifa_code = 'USA';
+UPDATE teams SET flag = 'au'     WHERE fifa_code = 'AUS';
+UPDATE teams SET flag = 'py'     WHERE fifa_code = 'PAR';
+UPDATE teams SET flag = 'tr'     WHERE fifa_code = 'TUR';
+UPDATE teams SET flag = 'de'     WHERE fifa_code = 'GER';
+UPDATE teams SET flag = 'ci'     WHERE fifa_code = 'CIV';
+UPDATE teams SET flag = 'ec'     WHERE fifa_code = 'ECU';
+UPDATE teams SET flag = 'cw'     WHERE fifa_code = 'CUW';
+UPDATE teams SET flag = 'nl'     WHERE fifa_code = 'NED';
+UPDATE teams SET flag = 'jp'     WHERE fifa_code = 'JPN';
+UPDATE teams SET flag = 'se'     WHERE fifa_code = 'SWE';
+UPDATE teams SET flag = 'tn'     WHERE fifa_code = 'TUN';
+UPDATE teams SET flag = 'be'     WHERE fifa_code = 'BEL';
+UPDATE teams SET flag = 'ir'     WHERE fifa_code = 'IRI';
+UPDATE teams SET flag = 'eg'     WHERE fifa_code = 'EGY';
+UPDATE teams SET flag = 'nz'     WHERE fifa_code = 'NZL';
+UPDATE teams SET flag = 'es'     WHERE fifa_code = 'ESP';
+UPDATE teams SET flag = 'uy'     WHERE fifa_code = 'URU';
+UPDATE teams SET flag = 'sa'     WHERE fifa_code = 'KSA';
+UPDATE teams SET flag = 'cv'     WHERE fifa_code = 'CPV';
+UPDATE teams SET flag = 'fr'     WHERE fifa_code = 'FRA';
+UPDATE teams SET flag = 'no'     WHERE fifa_code = 'NOR';
+UPDATE teams SET flag = 'sn'     WHERE fifa_code = 'SEN';
+UPDATE teams SET flag = 'iq'     WHERE fifa_code = 'IRQ';
+UPDATE teams SET flag = 'ar'     WHERE fifa_code = 'ARG';
+UPDATE teams SET flag = 'at'     WHERE fifa_code = 'AUT';
+UPDATE teams SET flag = 'jo'     WHERE fifa_code = 'JOR';
+UPDATE teams SET flag = 'dz'     WHERE fifa_code = 'DZA';
+UPDATE teams SET flag = 'co'     WHERE fifa_code = 'COL';
+UPDATE teams SET flag = 'pt'     WHERE fifa_code = 'POR';
+UPDATE teams SET flag = 'cd'     WHERE fifa_code = 'COD';
+UPDATE teams SET flag = 'uz'     WHERE fifa_code = 'UZB';
+UPDATE teams SET flag = 'gb-eng' WHERE fifa_code = 'ENG';
+UPDATE teams SET flag = 'hr'     WHERE fifa_code = 'CRO';
+UPDATE teams SET flag = 'gh'     WHERE fifa_code = 'GHA';
+UPDATE teams SET flag = 'pa'     WHERE fifa_code = 'PAN';

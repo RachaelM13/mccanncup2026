@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import type { Match } from '@/types';
 import { ROUND_LABELS } from '@/types';
+import FlagIcon from '@/components/ui/FlagIcon';
 
 interface RecentResultsProps {
   matches: Match[];
@@ -30,7 +31,7 @@ export default function RecentResults({ matches }: RecentResultsProps) {
           <div className="flex items-center justify-between gap-3">
             {/* Home */}
             <div className="flex items-center gap-2 flex-1 min-w-0">
-              <span className="text-xl flex-shrink-0">{match.home_team?.flag ?? '🏳️'}</span>
+              <FlagIcon code={match.home_team?.flag} name={match.home_team?.name ?? ''} className="h-5 w-7 flex-shrink-0" />
               <span
                 className={`text-sm font-medium truncate ${
                   match.winner_id === match.home_team_id ? 'text-white font-semibold' : 'text-muted-foreground'
@@ -68,7 +69,7 @@ export default function RecentResults({ matches }: RecentResultsProps) {
               >
                 {match.away_team?.name ?? 'TBD'}
               </span>
-              <span className="text-xl flex-shrink-0">{match.away_team?.flag ?? '🏳️'}</span>
+              <FlagIcon code={match.away_team?.flag} name={match.away_team?.name ?? ''} className="h-5 w-7 flex-shrink-0" />
             </div>
           </div>
 

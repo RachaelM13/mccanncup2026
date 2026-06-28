@@ -6,6 +6,7 @@ import type { Match, Team } from '@/types';
 import { ROUND_LABELS } from '@/types';
 import { adminUpdateMatchAction } from '@/app/actions/tournament';
 import { format } from 'date-fns';
+import FlagIcon from '@/components/ui/FlagIcon';
 
 interface MatchEditorProps {
   match: Match;
@@ -92,7 +93,7 @@ export default function MatchEditor({ match, teams, password, onUpdated }: Match
         {/* Teams */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 text-sm">
-            <span>{homeTeam?.flag ?? '🏳️'}</span>
+            <FlagIcon code={homeTeam?.flag} name={homeTeam?.name} className="h-4 w-6 flex-shrink-0" />
             <span className={`font-medium truncate ${isCompleted && match.winner_id === match.home_team_id ? 'text-white' : 'text-muted-foreground'}`}>
               {homeTeam?.name ?? 'TBD'}
             </span>
@@ -103,7 +104,7 @@ export default function MatchEditor({ match, teams, password, onUpdated }: Match
             )}
           </div>
           <div className="flex items-center gap-2 text-sm mt-0.5">
-            <span>{awayTeam?.flag ?? '🏳️'}</span>
+            <FlagIcon code={awayTeam?.flag} name={awayTeam?.name} className="h-4 w-6 flex-shrink-0" />
             <span className={`font-medium truncate ${isCompleted && match.winner_id === match.away_team_id ? 'text-white' : 'text-muted-foreground'}`}>
               {awayTeam?.name ?? 'TBD'}
             </span>
@@ -163,7 +164,7 @@ export default function MatchEditor({ match, teams, password, onUpdated }: Match
                   >
                     <option value="">— TBD —</option>
                     {sortedTeams.map((t) => (
-                      <option key={t.id} value={t.id}>{t.flag} {t.name}</option>
+                      <option key={t.id} value={t.id}>{t.name}</option>
                     ))}
                   </select>
                 </div>
@@ -176,7 +177,7 @@ export default function MatchEditor({ match, teams, password, onUpdated }: Match
                   >
                     <option value="">— TBD —</option>
                     {sortedTeams.map((t) => (
-                      <option key={t.id} value={t.id}>{t.flag} {t.name}</option>
+                      <option key={t.id} value={t.id}>{t.name}</option>
                     ))}
                   </select>
                 </div>
@@ -224,7 +225,7 @@ export default function MatchEditor({ match, teams, password, onUpdated }: Match
                       onClick={() => completeMatch(homeTeamId || match.home_team_id!)}
                       className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-[#22C55E]/10 hover:bg-[#22C55E]/20 text-[#22C55E] text-sm font-semibold border border-[#22C55E]/30 transition-colors disabled:opacity-50"
                     >
-                      <span>{(teams.find(t => t.id === (homeTeamId || match.home_team_id))?.flag) ?? '🏳️'}</span>
+                      <FlagIcon code={teams.find(t => t.id === (homeTeamId || match.home_team_id))?.flag} name={teams.find(t => t.id === (homeTeamId || match.home_team_id))?.name ?? ''} className="h-4 w-6 flex-shrink-0" />
                       <span className="truncate">{(teams.find(t => t.id === (homeTeamId || match.home_team_id))?.name) ?? 'Home'} wins</span>
                     </button>
                     <button
@@ -232,7 +233,7 @@ export default function MatchEditor({ match, teams, password, onUpdated }: Match
                       onClick={() => completeMatch(awayTeamId || match.away_team_id!)}
                       className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-[#22C55E]/10 hover:bg-[#22C55E]/20 text-[#22C55E] text-sm font-semibold border border-[#22C55E]/30 transition-colors disabled:opacity-50"
                     >
-                      <span>{(teams.find(t => t.id === (awayTeamId || match.away_team_id))?.flag) ?? '🏳️'}</span>
+                      <FlagIcon code={teams.find(t => t.id === (awayTeamId || match.away_team_id))?.flag} name={teams.find(t => t.id === (awayTeamId || match.away_team_id))?.name ?? ''} className="h-4 w-6 flex-shrink-0" />
                       <span className="truncate">{(teams.find(t => t.id === (awayTeamId || match.away_team_id))?.name) ?? 'Away'} wins</span>
                     </button>
                   </div>

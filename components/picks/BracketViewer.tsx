@@ -8,6 +8,7 @@ import { ROUND_LABELS } from '@/types';
 import { computeEffectiveTeams, buildTeamsMap } from '@/lib/bracket';
 import { calculateScore } from '@/lib/scoring';
 import PickMatchCard from './PickMatchCard';
+import FlagIcon from '@/components/ui/FlagIcon';
 
 const PICKABLE_ROUNDS: Round[] = ['R32', 'R16', 'QF', 'SF', 'FINAL'];
 
@@ -140,7 +141,10 @@ export default function BracketViewer({
                 {pickedId && matchPop[pickedId] !== undefined && (
                   <p className="text-[10px] text-muted-foreground px-1">
                     {matchPop[pickedId]}% of players picked{' '}
-                    <span className="text-white">{teamsMap[pickedId]?.name ?? '—'}</span>
+                    <span className="inline-flex items-center gap-1 text-white">
+                      <FlagIcon code={teamsMap[pickedId]?.flag} name={teamsMap[pickedId]?.name ?? ''} className="h-3.5 w-5" />
+                      {teamsMap[pickedId]?.name ?? '—'}
+                    </span>
                   </p>
                 )}
               </div>

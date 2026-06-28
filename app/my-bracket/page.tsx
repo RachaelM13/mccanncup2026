@@ -1,21 +1,21 @@
-import { getTournamentProvider } from '@/lib/providers';
-import Header from '@/components/layout/Header';
-import MyBracketClient from '@/components/picks/MyBracketClient';
+import { getTournamentProvider } from "@/lib/providers";
+import Header from "@/components/layout/Header";
+import MyBracketClient from "@/components/picks/MyBracketClient";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export default async function MyBracketPage() {
   const provider = getTournamentProvider();
   const matches = await provider.getMatches();
 
   const deadline = new Date(
-    process.env.NEXT_PUBLIC_SUBMISSION_DEADLINE ?? '2026-07-04T18:00:00Z'
+    process.env.NEXT_PUBLIC_SUBMISSION_DEADLINE ?? "2026-07-04T18:00:00Z",
   );
 
   return (
     <>
       <Header />
-      <main className="max-w-3xl mx-auto px-4 pt-6 pb-24 sm:pb-8">
+      <main className="w-full max-w-7xl mx-auto px-4 pb-24 sm:pb-8 pt-6 space-y-8 overflow-x-hidden">
         <MyBracketClient matches={matches} deadline={deadline} />
       </main>
     </>
