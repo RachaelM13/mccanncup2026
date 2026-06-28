@@ -115,6 +115,10 @@
   }
 }
 
+/* Hide scrollbar but keep scroll behaviour */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
 /* Flag emoji sizing */
 .flag-lg { font-size: 2rem; line-height: 1; }
 .flag-md { font-size: 1.25rem; line-height: 1; }
