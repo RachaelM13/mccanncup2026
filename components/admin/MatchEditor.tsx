@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Match, Team } from '@/types';
-import { ROUND_LABELS } from '@/types';
 import { adminUpdateMatchAction } from '@/app/actions/tournament';
 import { format } from 'date-fns';
 import FlagIcon from '@/components/ui/FlagIcon';
@@ -83,7 +82,7 @@ export default function MatchEditor({ match, teams, password, onUpdated }: Match
       {/* Summary row */}
       <button
         className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-white/5 transition-colors"
-        onClick={() => !isCompleted && setExpanded((v) => !v)}
+        onClick={() => setExpanded((v) => !v)}
       >
         {/* Match number */}
         <span className="text-xs font-bold text-muted-foreground w-6 flex-shrink-0 tabular-nums">
@@ -132,19 +131,17 @@ export default function MatchEditor({ match, teams, password, onUpdated }: Match
         </div>
 
         {/* Expand arrow */}
-        {!isCompleted && (
-          <svg
-            className={`w-4 h-4 text-muted-foreground flex-shrink-0 transition-transform ${expanded ? 'rotate-180' : ''}`}
-            fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-          </svg>
-        )}
+        <svg
+          className={`w-4 h-4 text-muted-foreground flex-shrink-0 transition-transform ${expanded ? 'rotate-180' : ''}`}
+          fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
       </button>
 
       {/* Editor panel */}
       <AnimatePresence>
-        {expanded && !isCompleted && (
+        {expanded && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
@@ -153,6 +150,13 @@ export default function MatchEditor({ match, teams, password, onUpdated }: Match
             className="overflow-hidden"
           >
             <div className="px-4 pb-4 space-y-4 border-t border-border pt-4">
+              {/* Warning when editing a completed match */}
+              {isCompleted && (
+                <div className="rounded-lg bg-[#F59E0B]/10 border border-[#F59E0B]/30 p-2.5 text-xs text-[#F59E0B]">
+                  ⚠️ Editing a completed match — saving will update the score and winner in place.
+                </div>
+              )}
+
               {/* Team selectors */}
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1.5">
@@ -239,14 +243,44 @@ export default function MatchEditor({ match, teams, password, onUpdated }: Match
                   </div>
                 )}
 
-                {/* Save scores only (mark live) */}
+                {/* Save scores only */}
                 <button
                   disabled={loading}
                   onClick={saveScores}
                   className="w-full px-3 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-white text-sm font-medium border border-border transition-colors disabled:opacity-50"
                 >
-                  {loading ? 'Saving…' : 'Save scores (keep live)'}
+                  {loading ? 'Saving…' : isCompleted ? 'Save score correction' : 'Save scores (keep live)'}
                 </button>
+
+                {/* Re-open a completed match as live */}
+                {isCompleted && (
+                  <button
+                    disabled={loading}
+                    onClick={async () => {
+                      setLoading(true);
+                      setError(null);
+                      try {
+                        const updated = await adminUpdateMatchAction(password, match.id, {
+                          home_team_id: homeTeamId || null,
+                          away_team_id: awayTeamId || null,
+                          home_score: homeScore !== '' ? parseInt(homeScore) : null,
+                          away_score: awayScore !== '' ? parseInt(awayScore) : null,
+                          winner_id: null,
+                          status: 'LIVE',
+                        });
+                        onUpdated(updated);
+                        setExpanded(false);
+                      } catch (e) {
+                        setError(e instanceof Error ? e.message : 'Update failed');
+                      } finally {
+                        setLoading(false);
+                      }
+                    }}
+                    className="w-full px-3 py-2 rounded-lg bg-[#EF4444]/10 hover:bg-[#EF4444]/20 text-[#EF4444] text-sm font-medium border border-[#EF4444]/30 transition-colors disabled:opacity-50"
+                  >
+                    Re-open as Live (undo Full Time)
+                  </button>
+                )}
               </div>
             </div>
           </motion.div>
